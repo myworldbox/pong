@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>pong</title>
+</head>
+
+<body style="background: black">
+
+<div align="center" width =>
+    <canvas id='canvas' width="400" height="400" align="center"></canvas>
+</div>
+    
+<script>
+    let canvas = document.getElementById('canvas')
+    let canvasContext = canvas.getContext('2d')
+    let ballX = canvas.width / 2
+    let ballY = canvas.height / 2
+    let vx = 15
+    let vy = vx / 5
+    let paddleW = 5
+    let paddleH = paddleW * 10
+    let paddleY1 = canvas.height / 2
+    let paddleY2 = paddleY1
+    let score1 = 0
+    let score2 = score1
+    let winningScore = 10
+    let pause = 1
+
+    window.onload = function () {
+        setInterval(function () {
+            move()
+            drawView()
+        }, 50)
+        if (pause = 1) {
+            canvas.addEventListener('mousedown', function (event) {
+                pause = 0
+            })
+        }
+
+        canvas.addEventListener('touchmove', function (event) {
+            mouseFix()
+        })
+
+        canvas.addEventListener('mousemove', function (event) {
+            mouseFix()
+        })
+    }
+
+    function mouseFix() {
+        let mousePlace = mouse(event)
+        paddleX1 = mousePlace.x
+        paddleY1 = mousePlace.y - paddleH / 2
+    }
+
+    function mouse(event) {
+        let rect = canvas.getBoundingClientRect()
+        let root = document.documentElement
+        let mouseX = event.clientX - rect.left - root.scrollLeft
+        let mouseY = event.clientY - rect.top - root.scrollTop
+        return {
+            x: mouseX,
+            y: mouseY
+        }
+    }
+
+    function restart() {
+        if (score1 == winningScore || score2 == winningScore) {
+            score1 = score2 = 0
+            pause = 1
+        }
+        vx = -vx
+        ballX = canvas.width / 2
+        ballY = canvas.height / 2
+    }
+
+    function AI() {
+        if (paddleY2 < ballY) {
+            paddleY2 += 10
+        } else if (paddleY2 > ballY + 5) {
+            paddleY2 -= 10
+        }
+    }
+
+    function move() {
+        AI()
+        ballX += vx
+        ballY += vy
+        if (ballX < paddleH && pause == 0) {
+            if (ballY > paddleY1 && ballY < paddleY1 + paddleH) {
+                vx = -vx
+            }
+            if (ballX < 0) {
+                score2++
+                restart()
+            }
+        }
+        if (ballX > canvas.width - paddleH && pause == 0) {
+            if (ballY > paddleY2 && ballY < paddleY2 + paddleH) {
+                vx = -vx
+            }
+            if (ballX > canvas.width) {
+                score1++
+                restart()
+            }
+        }
+        if (ballX < 0 || ballX > canvas.width && pause == 1) {
+            vx = -vx
+        }
+        if (ballY < 0 || ballY > canvas.height) {
+            vy = -vy
+        }
+    }
+
+    function drawView() {
+        colorRect(0, 0, canvas.width, canvas.height, 'red')
+        if (pause == 0) {
+            colorRect(canvas.width / 2, 0, 1, canvas.height, 'white')
+            colorRect(25, paddleY1, paddleW, paddleH, 'white')
+            colorRect(canvas.width - 25, paddleY2, paddleW, paddleH, 'white')
+            canvasContext.beginPath()
+            canvasContext.arc(ballX, ballY, 10, 0, 2 * Math.PI)
+            canvasContext.fill()
+            canvasContext.font = "20px Courier New"
+            canvasContext.fillText('Score: ' + score1, canvas.width / 2 - 150, 100)
+            canvasContext.fillText('Score: ' + score2, canvas.width / 2 + 50, 100)
+        } else {
+            canvasContext.fillStyle = 'yellow'
+            canvasContext.font = "30px Courier New"
+            canvasContext.beginPath()
+            canvasContext.arc(ballX, ballY, 50, 0, 2 * Math.PI)
+            canvasContext.fill()
+            canvasContext.fillText('AL presents', canvas.width / 2 - 100, canvas.height / 2)
+            canvasContext.fillText('Pong', canvas.width / 2 - 40, 100)
+            canvasContext.font = "15px Courier New"
+            canvasContext.fillText('*Tap to play*', canvas.width / 2 - 60, 300)
+        }
+    }
+
+    function colorRect(cX, cY, cWidth, cHeight, cColor) {
+        canvasContext.fillStyle = cColor
+        canvasContext.fillRect(cX, cY, cWidth, cHeight)
+    }
+</script>
+
+</body>
+
+</html>
