@@ -14,7 +14,7 @@
 } 
 
 canvas {
-    width: 50vw;
+    width: 100vw;
     height: 80vh;
     display: flex;
     top: center;
