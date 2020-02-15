@@ -1,6 +1,10 @@
 * { 
+    -webkit-user-select: none; 
+    -moz-user-select: none; 
+    -ms-user-select: none; 
+    user-select: none;
     color: white;
-    background: black;
+    background: blue;
     font-family: 'Orbitron', sans-serif;
     list-style-type: none;
     margin: 0 auto;
@@ -15,12 +19,13 @@
 
 canvas {
     width: 100vw;
-    height: 60vh;
+    height: 65vh;
     display: flex;
     top: center;
 }
 
 .button{
+    background: black;
     width: 100vw;
     height: 10vh;
 }
