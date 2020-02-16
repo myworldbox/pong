@@ -114,20 +114,22 @@ function drawView() {
         canvasContext.beginPath()
         canvasContext.arc(ballX, ballY, 10, 0, 2 * Math.PI)
         canvasContext.fill()
-        canvasContext.font = "35px Courier New"
-        canvasContext.fillText('Score: ' + playerScore, canvas.width / 2 - 200, canvas.height / 2 + 200)
-        canvasContext.fillText('Score: ' + aiScore, canvas.width / 2 + 50, canvas.height / 2 + 200)
+        canvasContext.font = "10vh Courier New"
+        canvasContext.fillText(playerScore, canvas.width / 2 - 50, canvas.height / 2 + 200)
+        canvasContext.fillText(aiScore, canvas.width / 2 + 50, canvas.height / 2 + 200)
     } else {
         playerScore = aiScore = 0
         canvasContext.fillStyle = 'yellow'
-        canvasContext.font = "70px Courier New"
+        canvasContext.font = "10vh Courier New"
         canvasContext.beginPath()
         canvasContext.arc(ballX, ballY, 50, 0, 2 * Math.PI)
         canvasContext.fill()
-        canvasContext.fillText('AL presents', canvas.width / 2 - 200, canvas.height / 2)
-        canvasContext.fillText('Pong', canvas.width / 2 - 60, canvas.height / 1.5)
-        canvasContext.font = "35px Courier New"
-        canvasContext.fillText('*Tap to play*', canvas.width / 2 - 120, canvas.height / 1.1)
+        canvasContext.fillText('AL presents', canvas.width / 2, canvas.height / 2)
+        canvasContext.fillText('Pong', canvas.width / 2, canvas.height / 1.5)
+        canvasContext.font = "5vh Courier New"
+        canvasContext.fillText('*Tap to play*', canvas.width / 2, canvas.height / 1.1)
+        canvasContext.textBaseline = 'middle';
+        canvasContext.textAlign = "center";
     }
 }
 
