@@ -114,13 +114,13 @@ function drawView() {
         canvasContext.beginPath()
         canvasContext.arc(ballX, ballY, 10, 0, 2 * Math.PI)
         canvasContext.fill()
-        canvasContext.font = "10vh Courier New"
+        canvasContext.font = "8vh Courier New"
         canvasContext.fillText(playerScore, canvas.width / 2 - 50, canvas.height / 2 + 200)
         canvasContext.fillText(aiScore, canvas.width / 2 + 50, canvas.height / 2 + 200)
     } else {
         playerScore = aiScore = 0
         canvasContext.fillStyle = 'yellow'
-        canvasContext.font = "10vh Courier New"
+        canvasContext.font = "8vh Courier New"
         canvasContext.beginPath()
         canvasContext.arc(ballX, ballY, 50, 0, 2 * Math.PI)
         canvasContext.fill()
