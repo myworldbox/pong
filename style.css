@@ -4,7 +4,7 @@
     -ms-user-select: none; 
     user-select: none;
     color: white;
-    background: lightgreen;
+    background: linear-gradient(90deg, rgba(195,194,255,1) 0%, rgba(41,255,50,1) 100%);
     font-family: 'Orbitron', sans-serif;
     list-style-type: none;
     margin: 0 auto;
